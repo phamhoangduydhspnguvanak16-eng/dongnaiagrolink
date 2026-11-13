@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DONG NAI AGROLINK - Nền Tảng Nông Nghiệp Số Thông Minh</title>
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <style>
+    @keyframes pulse-ring {
+      0% { transform: scale(0.95); opacity: 0.8; }
+      50% { transform: scale(1.15); opacity: 0.4; }
+      100% { transform: scale(0.95); opacity: 0.8; }
+    }
+    .mic-active {
+      animation: pulse-ring 2s infinite ease-in-out;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: rgba(0, 0, 0, 0.05);
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: rgba(16, 185, 129, 0.3);
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col font-sans">
+
+  <!-- HEADER CHÍNH -->
+  <header class="bg-gradient-to-r from-emerald-800 via-teal-700 to-sky-800 text-white shadow-lg sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3.5 flex flex-wrap items-center justify-between gap-4">
+      <div class="flex items-center space-x-3">
+        <div class="w-11 h-11 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-2xl shadow-inner">
+          🌱
+        </div>
+        <div>
+          <div class="flex items-center space-x-2">
+            <span class="font-black text-xl tracking-wider text-emerald-300">DONG NAI</span>
+            <span class="font-extrabold text-xl tracking-wider text-white">AGROLINK</span>
+            <span class="bg-emerald-400/20 text-emerald-200 text-xs px-2 py-0.5 rounded-full border border-emerald-400/30 font-medium">AI 2.0</span>
+          </div>
+          <p class="text-xs text-emerald-100/80 hidden sm:block">Kết nối nguồn cung – Đồng hành sản xuất – Nông nghiệp bền vững Đồng Nai</p>
+        </div>
+      </div>
+
+      <!-- Navigation Tabs -->
+      <nav class="flex items-center bg-black/20 p-1 rounded-xl backdrop-blur-sm border border-white/10 text-xs sm:text-sm">
+        <button onclick="switchTab('farmer')" id="tab-farmer" class="nav-btn px-3.5 py-1.5 rounded-lg font-semibold transition-all flex items-center space-x-1.5 bg-emerald-500 text-white shadow">
+          <span>👨‍🌾 Nông Dân</span>
+        </button>
+        <button onclick="switchTab('htx')" id="tab-htx" class="nav-btn px-3.5 py-1.5 rounded-lg font-semibold transition-all flex items-center space-x-1.5 text-emerald-100 hover:text-white hover:bg-white/10">
+          <span>🏢 Hợp Tác Xã</span>
+        </button>
+        <button onclick="switchTab('buyer')" id="tab-buyer" class="nav-btn px-3.5 py-1.5 rounded-lg font-semibold transition-all flex items-center space-x-1.5 text-emerald-100 hover:text-white hover:bg-white/10">
+          <span>🏭 Doanh Nghiệp</span>
+        </button>
+        <button onclick="switchTab('ai-center')" id="tab-ai-center" class="nav-btn px-3.5 py-1.5 rounded-lg font-semibold transition-all flex items-center space-x-1.5 text-emerald-100 hover:text-white hover:bg-white/10">
+          <span>🤖 AI Điều Phối</span>
+        </button>
+        <button onclick="switchTab('case-study')" id="tab-case-study" class="nav-btn px-3.5 py-1.5 rounded-lg font-semibold transition-all flex items-center space-x-1.5 text-emerald-100 hover:text-white hover:bg-white/10">
+          <span>📌 Tình Huống 100 Tấn</span>
+        </button>
+      </nav>
+
+      <!-- Badge Tỉnh Đồng Nai -->
+      <div class="hidden lg:flex items-center space-x-2 text-xs bg-white/10 px-3 py-1.5 rounded-lg border border-white/10">
+        <span class="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+        <span class="text-emerald-100">Dữ liệu thời gian thực: <strong>Đồng Nai</strong></span>
+      </div>
+    </div>
+  </header>
+
+  <!-- BODY CONTENT CONTAINER -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 py-6 flex-1 w-full">
+
+    <!-- ========================================== -->
+    <!-- 1. PHÂN HỆ NÔNG DÂN (FARMER VIEW) -->
+    <!-- ========================================== -->
+    <section id="view-farmer" class="space-y-6">
+      <!-- Banner Chào Nông Dân -->
+      <div class="bg-gradient-to-r from-emerald-600 to-teal-700 rounded-2xl p-6 text-white shadow-md relative overflow-hidden">
+        <div class="relative z-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+          <div>
+            <div class="inline-flex items-center gap-2 bg-emerald-800/40 px-3 py-1 rounded-full text-xs font-medium text-emerald-200 mb-2 border border-emerald-400/20">
+              <span>📍 Vùng trồng: Xã Suối Tre, TP. Long Khánh, Đồng Nai</span>
+              <span>•</span>
+              <span>Mã hộ: DN-LK-482</span>
+            </div>
+            <h1 class="text-2xl font-bold">Kính chào Bác Ba Thắng!</h1>
+            <p class="text-emerald-100 text-sm mt-1">Vườn Sầu Riêng Ri6 (1.8 Hecta) • Niên vụ 2026 đang vào giai đoạn nuôi trái già.</p>
+          </div>
+          <div class="flex gap-2">
+            <span class="px-3 py-1.5 rounded-xl bg-white/15 backdrop-blur-sm border border-white/20 text-xs text-white flex items-center gap-1.5">
+              <span>🛡️ VietGAP: Đạt chuẩn</span>
+            </span>
+            <span class="px-3 py-1.5 rounded-xl bg-white/15 backdrop-blur-sm border border-white/20 text-xs text-white flex items-center gap-1.5">
+              <span>🏷️ Mã số vùng trồng: VN-DNOR-0082</span>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Trọng tâm: TRỢ LÝ GIỌNG NÓI TIẾNG VIỆT (VOICE AI ASSISTANT) -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div class="lg:col-span-2 bg-white rounded-2xl p-6 border border-emerald-100 shadow-sm flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <div class="flex items-center space-x-2">
+                <span class="text-2xl">🎙️</span>
+                <div>
+                  <h2 class="font-bold text-lg text-slate-800">Trợ Lý Giọng Nói Nông Nghiệp AI</h2>
+                  <p class="text-xs text-slate-500">Chỉ cần bấm nút và nói tự nhiên bằng tiếng Việt – Không cần gõ phím</p>
+                </div>
+              </div>
+              <span id="voice-status-badge" class="text-xs px-2.5 py-1 rounded-full bg-slate-100 text-slate-600 font-medium">Sẵn sàng lắng nghe</span>
+            </div>
+
+            <!-- Khung hội thoại AI Trực Quan -->
+            <div id="dialogue-box" class="bg-slate-50 rounded-xl p-4 border border-slate-200 min-h-[160px] space-y-3 custom-scrollbar overflow-y-auto max-h-[220px]">
+              <div class="flex items-start gap-2.5">
+                <div class="w-8 h-8 rounded-full bg-emerald-600 text-white flex items-center justify-center text-xs font-bold flex-shrink-0">AI</div>
+                <div class="bg-white p-3 rounded-2xl rounded-tl-none border border-slate-200 text-sm shadow-sm max-w-[85%] text-slate-700">
+                  "Chào bác Ba Thắng! Vườn sầu riêng Ri6 1.8 ha của bác dạo này phát triển thế nào rồi? Dự kiến tầm khi nào mình thu hoạch và được chừng bao nhiêu tấn vậy bác?"
+                </div>
+              </div>
+
+              <!-- Tin nhắn của Nông dân (sẽ hiện khi bấm demo) -->
+              <div id="farmer-speech-bubble" class="flex items-start gap-2.5 justify-end hidden">
+                <div class="bg-emerald-600 text-white p-3 rounded-2xl rounded-tr-none text-sm shadow-sm max-w-[85%]">
+                  "Vườn sầu riêng Ri6 của tôi ở Suối Tre trái bự đều đẹp lắm rồi con. Dự kiến cắt khoảng ngày 15 đến 20 tháng 6, chắc thu được cỡ 28 tấn đó con."
+                </div>
+                <div class="w-8 h-8 rounded-full bg-amber-500 text-white flex items-center justify-center text-xs font-bold flex-shrink-0">Bác Ba</div>
+              </div>
+
+              <!-- Phản hồi trích xuất thực thể của AI -->
+              <div id="ai-extract-bubble" class="flex items-start gap-2.5 hidden">
+                <div class="w-8 h-8 rounded-full bg-emerald-600 text-white flex items-center justify-center text-xs font-bold flex-shrink-0">AI</div>
+                <div class="bg-emerald-50 border border-emerald-200 p-3 rounded-2xl rounded-tl-none text-sm text-emerald-900 shadow-sm max-w-[85%] space-y-1.5">
+                  <div class="font-semibold flex items-center gap-1.5 text-emerald-800">
+                    <span>✅ AI đã trích xuất thông tin thành công:</span>
+                  </div>
+                  <ul class="text-xs space-y-1 text-slate-700">
+                    <li>• <strong>Giống:</strong> Sầu riêng Ri6 (1.8 hecta)</li>
+                    <li>• <strong>Thời gian thu hoạch:</strong> 15/06/2026 - 20/06/2026</li>
+                    <li>• <strong>Sản lượng dự kiến:</strong> 28.0 Tấn (Chất lượng loại 1: ~85%)</li>
+                  </ul>
+                  <p class="text-xs text-emerald-700 font-medium">Bác Ba kiểm tra lại rồi bấm "Xác nhận đồng bộ" phía dưới để gửi lên Hợp Tác Xã Xuân Định nhé!</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Nút kích hoạt tương tác giọng nói -->
+          <div class="mt-4 pt-4 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-3">
+            <div class="flex items-center gap-3">
+              <button id="btn-mic" onclick="simulateVoiceInput()" class="relative flex items-center gap-2 px-5 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm shadow-lg shadow-emerald-600/30 transition-all">
+                <span class="text-lg">🎙️</span>
+                <span id="mic-label">Bấm để nói chuyện với AI</span>
+              </button>
+              <button onclick="resetVoiceInput()" class="text-xs text-slate-500 hover:text-slate-800 underline">Làm lại</button>
+            </div>
+            
+            <button id="btn-sync-htx" onclick="confirmSyncHTX()" disabled class="px-5 py-2.5 rounded-xl bg-slate-200 text-slate-400 font-semibold text-xs transition-all flex items-center gap-1.5 cursor-not-allowed">
+              <span>📤 Xác nhận & Đồng bộ lên Hợp tác xã</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Cột Phải: Trạng Thái Lô Vườn & Chẩn Đoán Sâu Bệnh -->
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm flex flex-col justify-between">
+          <div>
+            <h3 class="font-bold text-slate-800 text-base mb-3 flex items-center gap-2">
+              <span>📸 Bác sĩ Cây trồng AI</span>
+              <span class="bg-emerald-100 text-emerald-800 text-[11px] px-2 py-0.5 rounded-full font-semibold">Chẩn đoán nhanh</span>
+            </h3>
+            <p class="text-xs text-slate-500 mb-4">Chụp ảnh lá hoặc vỏ trái sầu riêng để AI nhận diện rầy xanh, thán thư hoặc xì mủ tức thì.</p>
+            
+            <div class="border-2 border-dashed border-emerald-200 rounded-xl p-4 text-center bg-emerald-50/40 hover:bg-emerald-50 transition cursor-pointer" onclick="simulateDiagnosis()">
+              <div class="text-3xl mb-1">🌿</div>
+              <p class="text-xs font-semibold text-emerald-800">Bấm chụp ảnh hoặc tải hình lên</p>
+              <p class="text-[11px] text-slate-500 mt-0.5">Hỗ trợ nhận diện 18 loại sâu bệnh trên cây sầu riêng</p>
+            </div>
+
+            <!-- Kết quả chẩn đoán mô phỏng -->
+            <div id="diagnosis-result" class="mt-4 p-3 rounded-xl bg-slate-50 border border-slate-200 text-xs hidden">
+              <div class="flex items-center justify-between text-slate-800 font-semibold mb-1">
+                <span>Chẩn đoán: Rầy phấn trắng (Nhẹ)</span>
+                <span class="text-emerald-600 font-bold">96% khớp</span>
+              </div>
+              <p class="text-slate-600 text-[11px]">Khuyến cáo: Sử dụng dầu khoáng sinh học + nấm xanh Metarhizium. Tuân thủ thời gian cách ly (PHI) tối thiểu 14 ngày trước thu hoạch.</p>
+            </div>
+          </div>
+
+          <!-- Nhắc nhở mùa vụ -->
+          <div class="mt-4 pt-3 border-t border-slate-100">
+            <div class="flex items-center justify-between text-xs text-slate-500">
+              <span>Đợt cắt kế tiếp dự kiến:</span>
+              <span class="font-bold text-emerald-700">15/06 - 20/06</span>
+            </div>
+            <div class="w-full bg-slate-100 rounded-full h-2 mt-2">
+              <div class="bg-emerald-500 h-2 rounded-full" style="width: 78%"></div>
+            </div>
+            <div class="flex justify-between text-[10px] text-slate-400 mt-1">
+              <span>Xổ nhụy (Tháng 2)</span>
+              <span>Đang nuôi trái (78%)</span>
+              <span>Thu hoạch (Tháng 6)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Lịch sử các đợt cập nhật vườn -->
+      <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm">
+        <h3 class="font-bold text-slate-800 text-sm mb-4">Nhật ký cập nhật từ giọng nói của nông dân (Đã liên thông HTX)</h3>
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs">
+            <thead class="bg-slate-50 text-slate-500 uppercase font-semibold border-b border-slate-200">
+              <tr>
+                <th class="py-2.5 px-3">Thời gian ghi nhận</th>
+                <th class="py-2.5 px-3">Phương thức</th>
+                <th class="py-2.5 px-3">Nội dung cập nhật</th>
+                <th class="py-2.5 px-3">Sản lượng ước tính</th>
+                <th class="py-2.5 px-3">Trạng thái đồng bộ</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100 text-slate-700">
+              <tr>
+                <td class="py-2.5 px-3 font-medium">Hôm nay, 14:20</td>
+                <td class="py-2.5 px-3"><span class="px-2 py-0.5 rounded bg-emerald-50 text-emerald-700 border border-emerald-200">Voice AI</span></td>
+                <td class="py-2.5 px-3">Cập nhật lịch thu hoạch sầu riêng Ri6 từ 15-20/6</td>
+                <td class="py-2.5 px-3 font-semibold text-emerald-800">28.0 tấn</td>
+                <td class="py-2.5 px-3"><span class="text-emerald-600 font-semibold flex items-center gap-1">● Đã lưu HTX</span></td>
+              </tr>
+              <tr>
+                <td class="py-2.5 px-3 font-medium">10 ngày trước</td>
+                <td class="py-2.5 px-3"><span class="px-2 py-0.5 rounded bg-emerald-50 text-emerald-700 border border-emerald-200">Voice AI</span></td>
+                <td class="py-2.5 px-3">Báo hoàn tất tỉa trái đợt 2, trái đạt trọng lượng 1.8 - 2.5 kg</td>
+                <td class="py-2.5 px-3 font-semibold text-emerald-800">27.5 tấn</td>
+                <td class="py-2.5 px-3"><span class="text-emerald-600 font-semibold flex items-center gap-1">● Đã duyệt</span></td>
+              </tr>
+              <tr>
+                <td class="py-2.5 px-3 font-medium">25 ngày trước</td>
+                <td class="py-2.5 px-3"><span class="px-2 py-0.5 rounded bg-blue-50 text-blue-700 border border-blue-200">Ảnh chụp AI</span></td>
+                <td class="py-2.5 px-3">Kiểm tra tỷ lệ đậu trái sau xổ nhụy, độ đồng đều đạt 92%</td>
+                <td class="py-2.5 px-3 font-semibold text-slate-400">Đang ước tính</td>
+                <td class="py-2.5 px-3"><span class="text-emerald-600 font-semibold flex items-center gap-1">● Đã duyệt</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- 2. PHÂN HỆ HỢP TÁC XÃ (COOPERATIVE VIEW) -->
+    <!-- ========================================== -->
+    <section id="view-htx" class="space-y-6 hidden">
+      <!-- Header HTX -->
+      <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+        <div>
+          <div class="flex items-center gap-2">
+            <h1 class="text-xl font-bold text-slate-800">Hợp Tác Xã Nông Nghiệp & Dịch Vụ Xuân Định</h1>
+            <span class="bg-emerald-100 text-emerald-800 text-xs px-2.5 py-0.5 rounded-full font-semibold">Xuân Lộc, Đồng Nai</span>
+          </div>
+          <p class="text-xs text-slate-500 mt-1">Đơn vị chuyên canh Sầu riêng Ri6 & Monthong chất lượng cao xuất khẩu • 50 Hộ Xã Viên</p>
+        </div>
+        <div class="flex flex-wrap gap-2">
+          <button onclick="alert('Dữ liệu toàn bộ 50 hộ xã viên đã được đồng bộ với Sở Nông Nghiệp Đồng Nai.')" class="px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold">
+            🔄 Làm mới dữ liệu
+          </button>
+          <button onclick="alert('Đã xuất báo cáo năng lực nguồn cung tháng 6 sang file Excel & PDF.')" class="px-3.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold shadow">
+            📥 Xuất Hồ Sơ Nguồn Cung
+          </button>
+        </div>
+      </div>
+
+      <!-- Thống kê tổng hợp năng lực của HTX -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+        <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+          <p class="text-xs text-slate-500">Tổng xã viên liên kết</p>
+          <p class="text-2xl font-black text-slate-800 mt-1">50 <span class="text-xs font-normal text-slate-500">hộ</span></p>
+          <p class="text-[11px] text-emerald-600 mt-1">100% ứng dụng Voice AI</p>
+        </div>
+        <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+          <p class="text-xs text-slate-500">Tổng diện tích canh tác</p>
+          <p class="text-2xl font-black text-emerald-700 mt-1">118.5 <span class="text-xs font-normal text-slate-500">ha</span></p>
+          <p class="text-[11px] text-slate-500 mt-1">Trung bình 2.37 ha/hộ</p>
+        </div>
+        <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+          <p class="text-xs text-slate-500">Sản lượng dự kiến tháng 6</p>
+          <p class="text-2xl font-black text-sky-700 mt-1">182.0 <span class="text-xs font-normal text-slate-500">tấn</span></p>
+          <p class="text-[11px] text-sky-600 mt-1">Sầu riêng Ri6: 120 tấn</p>
+        </div>
+        <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+          <p class="text-xs text-slate-500">Mã số vùng trồng (GACC)</p>
+          <p class="text-2xl font-black text-amber-600 mt-1">VN-DNOR-0082</p>
+          <p class="text-[11px] text-emerald-600 mt-1">Hiệu lực: Đến 12/2027</p>
+        </div>
+      </div>
+
+      <!-- Danh sách 50 hộ & Lịch thu hoạch chi tiết -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div class="lg:col-span-2 bg-white rounded-2xl p-6 border border-slate-200 shadow-sm">
+          <div class="flex items-center justify-between mb-4">
+            <div>
+              <h3 class="font-bold text-slate-800 text-sm">Danh Sách Xã Viên & Tiến Độ Sản Lượng</h3>
+              <p class="text-xs text-slate-500">Dữ liệu tự động cập nhật qua trợ lý giọng nói của từng nông hộ</p>
+            </div>
+            <div class="flex gap-2">
+              <input type="text" placeholder="Tìm tên hộ / ấp..." class="text-xs px-3 py-1.5 border border-slate-200 rounded-lg focus:outline-none focus:border-emerald-500 w-40">
+            </div>
+          </div>
+
+          <div class="overflow-x-auto max-h-[340px] custom-scrollbar">
+            <table class="w-full text-left text-xs">
+              <thead class="bg-slate-50 text-slate-500 uppercase font-semibold border-b border-slate-200 sticky top-0">
+                <tr>
+                  <th class="py-2.5 px-3">Hộ nông dân</th>
+                  <th class="py-2.5 px-3">Giống</th>
+                  <th class="py-2.5 px-3">Diện tích</th>
+                  <th class="py-2.5 px-3">Sản lượng dự kiến</th>
+                  <th class="py-2.5 px-3">Khung ngày cắt</th>
+                  <th class="py-2.5 px-3">Tiêu chuẩn</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-100 text-slate-700">
+                <tr class="bg-emerald-50/50 hover:bg-emerald-50 transition">
+                  <td class="py-2 px-3 font-semibold text-slate-900">
+                    Nguyễn Văn Thắng (Chú Ba)
+                    <span class="block text-[10px] text-slate-400">Ấp 2, Suối Tre</span>
+                  </td>
+                  <td class="py-2 px-3">Ri6</td>
+                  <td class="py-2 px-3">1.8 ha</td>
+                  <td class="py-2 px-3 font-bold text-emerald-700">28.0 tấn</td>
+                  <td class="py-2 px-3 font-semibold text-sky-800">15/06 - 20/06</td>
+                  <td class="py-2 px-3"><span class="px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 font-medium text-[10px]">VietGAP / MSVT</span></td>
+                </tr>
+                <tr class="hover:bg-slate-50 transition">
+                  <td class="py-2 px-3 font-semibold text-slate-900">
+                    Trần Văn Tám (Tám Long)
+                    <span class="block text-[10px] text-slate-400">Ấp Bảo Thị</span>
+                  </td>
+                  <td class="py-2 px-3">Ri6</td>
+                  <td class="py-2 px-3">2.4 ha</td>
+                  <td class="py-2 px-3 font-bold text-emerald-700">36.5 tấn</td>
+                  <td class="py-2 px-3 font-semibold text-sky-800">12/06 - 18/06</td>
+                  <td class="py-2 px-3"><span class="px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 font-medium text-[10px]">VietGAP / MSVT</span></td>
+                </tr>
+                <tr class="hover:bg-slate-50 transition">
+                  <td class="py-2 px-3 font-semibold text-slate-900">
+                    Lê Hoàng Tư (Tư Lộc)
+                    <span class="block text-[10px] text-slate-400">Ấp Nông Doanh</span>
+                  </td>
+                  <td class="py-2 px-3">Ri6</td>
+                  <td class="py-2 px-3">1.5 ha</td>
+                  <td class="py-2 px-3 font-bold text-emerald-700">24.0 tấn</td>
+                  <td class="py-2 px-3 font-semibold text-sky-800">14/06 - 19/06</td>
+                  <td class="py-2 px-3"><span class="px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 font-medium text-[10px]">VietGAP / MSVT</span></td>
+                </tr>
+                <tr class="hover:bg-slate-50 transition">
+                  <td class="py-2 px-3 font-semibold text-slate-900">
+                    Võ Thị Mai (Chị Năm)
+                    <span class="block text-[10px] text-slate-400">Ấp Tân Hưng</span>
+                  </td>
+                  <td class="py-2 px-3">Ri6</td>
+                  <td class="py-2 px-3">2.0 ha</td>
+                  <td class="py-2 px-3 font-bold text-emerald-700">31.5 tấn</td>
+                  <td class="py-2 px-3 font-semibold text-sky-800">16/06 - 22/06</td>
+                  <td class="py-2 px-3"><span class="px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 font-medium text-[10px]">VietGAP / MSVT</span></td>
+                </tr>
+                <tr class="hover:bg-slate-50 transition">
+                  <td class="py-2 px-3 font-semibold text-slate-900">
+                    Đoàn Minh Hải
+                    <span class="block text-[10px] text-slate-400">Ấp Suối Tre 1</span>
+                  </td>
+                  <td class="py-2 px-3">Monthong</td>
+                  <td class="py-2 px-3">3.0 ha</td>
+                  <td class="py-2 px-3 font-bold text-amber-700">42.0 tấn</td>
+                  <td class="py-2 px-3 font-semibold text-slate-600">05/07 - 15/07</td>
+                  <td class="py-2 px-3"><span class="px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 font-medium text-[10px]">VietGAP / MSVT</span></td>
+                </tr>
+                <tr class="hover:bg-slate-50 transition">
+                  <td class="py-2 px-3 font-semibold text-slate-900">
+                    ... và 45 hộ thành viên khác
+                  </td>
+                  <td class="py-2 px-3">Đa dạng</td>
+                  <td class="py-2 px-3">107.8 ha</td>
+                  <td class="py-2 px-3 font-bold text-slate-700">182.0 tấn</td>
+                  <td class="py-2 px-3">Tháng 6 - Tháng 7</td>
+                  <td class="py-2 px-3"><span class="text-xs text-slate-400">Đầy đủ hồ sơ</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Cột Phải: Tiếp nhận Yêu Cầu Thu Mua từ Doanh Nghiệp -->
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <h3 class="font-bold text-slate-800 text-sm">Hộp Thư Đơn Hàng Doanh Nghiệp</h3>
+              <span class="w-2.5 h-2.5 rounded-full bg-red-500 animate-pulse"></span>
+            </div>
+            <p class="text-xs text-slate-500 mb-4">AI đã kết nối 1 doanh nghiệp xuất khẩu có nhu cầu khớp với nguồn cung của HTX:</p>
+
+            <div class="p-4 rounded-xl bg-sky-50 border border-sky-200 text-xs space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="font-bold text-sky-900">CÔNG TY XNK NÔNG SẢN ĐỒNG NAI XANH</span>
+                <span class="px-2 py-0.5 rounded bg-sky-200 text-sky-800 font-semibold text-[10px]">AI Match: 94.8%</span>
+              </div>
+              <p class="text-slate-600 text-[11px]">Cần thu mua: <strong>100 tấn Sầu riêng Ri6</strong></p>
+              <p class="text-slate-600 text-[11px]">Thời gian nhận: <strong>10/06 - 22/06/2026</strong></p>
+              <p class="text-slate-600 text-[11px]">Tiêu chuẩn: Xuất khẩu chính ngạch (VietGAP + MSVT GACC)</p>
+              <div class="pt-2 border-t border-sky-100 flex gap-2">
+                <button onclick="acceptBuyerOrder()" class="flex-1 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-xs text-center transition">
+                  Xác nhận cung ứng (100 tấn)
+                </button>
+                <button onclick="alert('Đã mở phòng trao đổi trực tuyến với Giám đốc Thu mua Công ty Đồng Nai Xanh.')" class="px-3 py-1.5 rounded-lg bg-white border border-sky-300 text-sky-800 font-semibold text-xs hover:bg-sky-50">
+                  💬 Trao đổi
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-4 p-3 rounded-xl bg-amber-50 border border-amber-200 text-xs text-amber-800">
+            <span class="font-semibold">💡 Khuyến nghị điều phối AI:</span>
+            <p class="text-[11px] mt-1">Nguồn cung Ri6 của HTX đạt đỉnh từ 12-20/6 (120 tấn), hoàn toàn bao phủ đơn hàng 100 tấn của DN Đồng Nai Xanh mà vẫn còn dự phòng 20 tấn an toàn.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- 3. PHÂN HỆ DOANH NGHIỆP (BUYER VIEW) -->
+    <!-- ========================================== -->
+    <section id="view-buyer" class="space-y-6 hidden">
+      <!-- Header Doanh Nghiệp -->
+      <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+        <div>
+          <div class="flex items-center gap-2">
+            <h1 class="text-xl font-bold text-slate-800">Cổng Thu Mua Nông Sản Doanh Nghiệp</h1>
+            <span class="bg-sky-100 text-sky-800 text-xs px-2.5 py-0.5 rounded-full font-semibold">Tài khoản Doanh Nghiệp Xuất Khẩu</span>
+          </div>
+          <p class="text-xs text-slate-500 mt-1">Đơn vị: Công Ty CP Xuất Nhập Khẩu Nông Sản Đồng Nai Xanh (Dong Nai Green Agri Export)</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="px-3 py-1.5 rounded-lg bg-emerald-50 text-emerald-700 border border-emerald-200 text-xs font-semibold">
+            Trạng thái đơn: Đang tìm kiếm nguồn cung
+          </span>
+        </div>
+      </div>
+
+      <!-- Form Đăng Ký Nhu Cầu Thu Mua (RFQ) -->
+      <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm">
+        <h3 class="font-bold text-slate-800 text-base mb-1 flex items-center gap-2">
+          <span>📝 Phiếu Đăng Ký Nhu Cầu Thu Mua Nông Sản (RFQ)</span>
+        </h3>
+        <p class="text-xs text-slate-500 mb-5">Hệ thống AI sẽ phân tích nhu cầu và đề xuất chính xác 2 Hợp tác xã tại Đồng Nai có khả năng đáp ứng tốt nhất.</p>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+          <div>
+            <label class="block font-semibold text-slate-700 mb-1">Loại nông sản & Giống</label>
+            <select id="rfq-crop" class="w-full p-2.5 rounded-xl border border-slate-200 bg-slate-50 focus:outline-none focus:border-emerald-500 font-medium">
+              <option value="ri6" selected>Sầu riêng Ri6 (Đặc sản Đồng Nai)</option>
+              <option value="monthong">Sầu riêng Monthong (Dona)</option>
+              <option value="buoi">Bưởi Đường Lá Cam Tân Triều</option>
+              <option value="xoai">Xoài Cát Chu Định Quán</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block font-semibold text-slate-700 mb-1">Sản lượng cần thu mua (Tấn)</label>
+            <input type="number" id="rfq-volume" value="100" class="w-full p-2.5 rounded-xl border border-slate-200 bg-slate-50 focus:outline-none focus:border-emerald-500 font-bold text-slate-800">
+          </div>
+
+          <div>
+            <label class="block font-semibold text-slate-700 mb-1">Khung thời gian cần nhận hàng</label>
+            <input type="text" id="rfq-dates" value="10/06/2026 - 22/06/2026" class="w-full p-2.5 rounded-xl border border-slate-200 bg-slate-50 focus:outline-none focus:border-emerald-500 font-medium">
+          </div>
+
+          <div>
+            <label class="block font-semibold text-slate-700 mb-1">Tiêu chuẩn kỹ thuật bắt buộc</label>
+            <select class="w-full p-2.5 rounded-xl border border-slate-200 bg-slate-50 focus:outline-none focus:border-emerald-500">
+              <option selected>Xuất khẩu chính ngạch (VietGAP + MSVT GACC)</option>
+              <option>Tiêu chuẩn GlobalGAP (Thị trường Âu - Mỹ)</option>
+              <option>Tiêu chuẩn Nội địa Siêu thị cao cấp (OCOP 4 sao)</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block font-semibold text-slate-700 mb-1">Địa điểm giao nhận</label>
+            <input type="text" value="Kho đóng gói lạnh TP. Long Khánh" class="w-full p-2.5 rounded-xl border border-slate-200 bg-slate-50 focus:outline-none focus:border-emerald-500">
+          </div>
+
+          <div class="flex items-end">
+            <button onclick="runAIMatchmaker()" class="w-full py-2.5 px-4 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-700 hover:from-emerald-700 hover:to-teal-800 text-white font-bold shadow-md transition flex items-center justify-center gap-2">
+              <span>🤖 Phân Tích & Gợi Ý 2 HTX Tối Ưu</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- KẾT QUẢ AI ĐỀ XUẤT 2 HỢP TÁC XÃ PHÙ HỢP NHẤT -->
+      <div id="ai-recommendation-cards" class="space-y-4">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <span class="text-xl">🏆</span>
+            <div>
+              <h3 class="font-bold text-slate-800 text-base">Kết Quả AI Đề Xuất 2 Hợp Tác Xã Tối Ưu Nhất</h3>
+              <p class="text-xs text-slate-500">Được chấm điểm dựa trên: Khối lượng sẵn sàng, Khung thu hoạch, Chứng nhận GACC và Cự ly vận chuyển</p>
+            </div>
+          </div>
+          <span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800">Thuật toán MAMS v2.4</span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- ĐỀ XUẤT 1 (TOP 1) -->
+          <div class="bg-white rounded-2xl p-6 border-2 border-emerald-500 shadow-md relative overflow-hidden flex flex-col justify-between">
+            <div class="absolute top-0 right-0 bg-emerald-600 text-white text-[11px] font-bold px-3 py-1 rounded-bl-xl shadow">
+              🥇 LỰA CHỌN TỐI ƯU NHẤT #1
+            </div>
+
+            <div>
+              <div class="flex items-start justify-between mb-3">
+                <div>
+                  <h4 class="font-black text-slate-900 text-lg">HTX Nông Nghiệp Dịch Vụ Xuân Định</h4>
+                  <p class="text-xs text-slate-500">Huyện Xuân Lộc, Tỉnh Đồng Nai • Cách cơ sở thu mua: <strong>22 km</strong></p>
+                </div>
+              </div>
+
+              <!-- Điểm tương thích -->
+              <div class="flex items-baseline gap-2 mb-4 bg-emerald-50 p-3 rounded-xl border border-emerald-100">
+                <span class="text-3xl font-black text-emerald-700">94.8</span>
+                <span class="text-xs text-slate-500 font-semibold">/ 100 Điểm Tương Thích AI</span>
+                <span class="ml-auto text-xs px-2 py-0.5 rounded bg-emerald-600 text-white font-bold">Rất Khuyến Nghị</span>
+              </div>
+
+              <!-- Ma trận chi tiết -->
+              <div class="space-y-2 text-xs text-slate-600">
+                <div class="flex justify-between pb-1.5 border-b border-slate-100">
+                  <span>Khả năng cung ứng:</span>
+                  <span class="font-bold text-slate-800">120 tấn Ri6 (Dư dôi 20% so với đơn 100 tấn)</span>
+                </div>
+                <div class="flex justify-between pb-1.5 border-b border-slate-100">
+                  <span>Khung ngày thu hoạch:</span>
+                  <span class="font-bold text-emerald-700">12/06 - 20/06/2026 (Trùng khớp 100%)</span>
+                </div>
+                <div class="flex justify-between pb-1.5 border-b border-slate-100">
+                  <span>Hồ sơ & Chứng nhận:</span>
+                  <span class="font-bold text-slate-800">VietGAP • Mã vùng trồng GACC: VN-DNOR-0082</span>
+                </div>
+                <div class="flex justify-between pb-1.5 border-b border-slate-100">
+                  <span>Độ uy tín mùa vụ trước:</span>
+                  <span class="font-bold text-emerald-700">98% (Đã cung cấp 210 tấn xuất khẩu năm 2025)</span>
+                </div>
+              </div>
+
+              <!-- Lý do AI lựa chọn -->
+              <div class="mt-4 p-3 rounded-xl bg-slate-50 border border-slate-200 text-xs">
+                <p class="font-semibold text-slate-800 mb-1">🤖 Lý do AI khuyến nghị:</p>
+                <p class="text-slate-600 text-[11px] leading-relaxed">
+                  HTX có 24 hộ xã viên liền kề có cùng ngày chín sầu riêng trong tuần 2 tháng 6. Sản lượng vượt chỉ tiêu giúp phòng ngừa rủi ro hao hụt, 100% diện tích đã được cấp mã số vùng trồng xuất khẩu sang Trung Quốc còn hạn đến 2027.
+                </p>
+              </div>
+            </div>
+
+            <!-- Nút Hành Động -->
+            <div class="mt-5 pt-4 border-t border-slate-100 flex gap-2">
+              <button onclick="initiateContract('HTX Nông Nghiệp Dịch Vụ Xuân Định')" class="flex-1 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs shadow transition">
+                🤝 Gửi Yêu Cầu Kết Nối & Đặt Cọc
+              </button>
+              <button onclick="alert('Đang kết nối camera hành trình và nhật ký số của 24 vườn thành viên HTX Xuân Định.')" class="px-3 py-2.5 rounded-xl border border-slate-200 hover:bg-slate-50 text-slate-700 text-xs font-semibold">
+                🔍 Soi Nhật Ký Vườn
+              </button>
+            </div>
+          </div>
+
+          <!-- ĐỀ XUẤT 2 (TOP 2) -->
+          <div class="bg-white rounded-2xl p-6 border border-slate-300 shadow-sm relative overflow-hidden flex flex-col justify-between">
+            <div class="absolute top-0 right-0 bg-slate-600 text-white text-[11px] font-bold px-3 py-1 rounded-bl-xl">
+              🥈 LỰA CHỌN DỰ PHÒNG #2
+            </div>
+
+            <div>
+              <div class="flex items-start justify-between mb-3">
+                <div>
+                  <h4 class="font-black text-slate-900 text-lg">HTX Cây Ăn Trái Bình Lộc</h4>
+                  <p class="text-xs text-slate-500">TP. Long Khánh, Tỉnh Đồng Nai • Cách cơ sở thu mua: <strong>8 km</strong></p>
+                </div>
+              </div>
+
+              <!-- Điểm tương thích -->
+              <div class="flex items-baseline gap-2 mb-4 bg-slate-50 p-3 rounded-xl border border-slate-200">
+                <span class="text-3xl font-black text-slate-700">88.5</span>
+                <span class="text-xs text-slate-500 font-semibold">/ 100 Điểm Tương Thích AI</span>
+                <span class="ml-auto text-xs px-2 py-0.5 rounded bg-slate-200 text-slate-700 font-bold">Phương Án Phụ Tốt</span>
+              </div>
+
+              <!-- Ma trận chi tiết -->
+              <div class="space-y-2 text-xs text-slate-600">
+                <div class="flex justify-between pb-1.5 border-b border-slate-100">
+                  <span>Khả năng cung ứng:</span>
+                  <span class="font-bold text-slate-800">85 tấn Ri6 (Thiếu 15 tấn - Cần liên minh xã bên)</span>
+                </div>
+                <div class="flex justify-between pb-1.5 border-b border-slate-100">
+                  <span>Khung ngày thu hoạch:</span>
+                  <span class="font-bold text-amber-700">08/06 - 17/06/2026 (Thu hoạch sớm hơn 2 ngày)</span>
+                </div>
+                <div class="flex justify-between pb-1.5 border-b border-slate-100">
+                  <span>Hồ sơ & Chứng nhận:</span>
+                  <span class="font-bold text-slate-800">VietGAP • OCOP 4 sao • MSVT đang gia hạn</span>
+                </div>
+                <div class="flex justify-between pb-1.5 border-b border-slate-100">
+                  <span>Cự ly vận chuyển:</span>
+                  <span class="font-bold text-emerald-700">Cực gần (8 km - Tiết kiệm 45% chi phí vận chuyển)</span>
+                </div>
+              </div>
+
+              <!-- Lý do AI lựa chọn -->
+              <div class="mt-4 p-3 rounded-xl bg-slate-50 border border-slate-200 text-xs">
+                <p class="font-semibold text-slate-800 mb-1">🤖 Lý do AI khuyến nghị:</p>
+                <p class="text-slate-600 text-[11px] leading-relaxed">
+                  Vị trí địa lý sát nhà máy giúp sầu riêng cắt xong đưa vào phòng lạnh ngay trong 30 phút, tỷ lệ dập gai gần như bằng 0. Điểm trừ là sản lượng tự có thiếu 15 tấn, cần ghép thêm nguồn từ HTX Xuân Tân liền kề.
+                </p>
+              </div>
+            </div>
+
+            <!-- Nút Hành Động -->
+            <div class="mt-5 pt-4 border-t border-slate-100 flex gap-2">
+              <button onclick="initiateContract('HTX Cây Ăn Trái Bình Lộc')" class="flex-1 py-2.5 rounded-xl bg-slate-700 hover:bg-slate-800 text-white font-bold text-xs shadow transition">
+                🤝 Gửi Đề Nghị Liên Minh Thu Mua
+              </button>
+              <button onclick="alert('Đã gửi thông báo yêu cầu bổ sung 15 tấn từ HTX Xuân Tân.')" class="px-3 py-2.5 rounded-xl border border-slate-200 hover:bg-slate-50 text-slate-700 text-xs font-semibold">
+                ➕ Ghép Liên Minh
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- 4. TRUNG TÂM AI ĐIỀU PHỐI & CẢNH BÁO RỦI RO -->
+    <!-- ========================================== -->
+    <section id="view-ai-center" class="space-y-6 hidden">
+      <!-- Title AI Center -->
+      <div class="bg-gradient-to-r from-slate-900 to-indigo-950 rounded-2xl p-6 text-white shadow-md">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+          <div>
+            <div class="inline-flex items-center gap-2 bg-indigo-500/20 px-3 py-1 rounded-full text-xs font-medium text-indigo-300 mb-2 border border-indigo-400/30">
+              <span>Hệ Thống Trí Tuệ Nhân Tạo Dự Báo & Giám Sát Cung Cầu Nông Sản</span>
+            </div>
+            <h1 class="text-xl font-bold">Bảng Điều Khiển AI Dự Báo Nguồn Cung & Cảnh Báo Sớm</h1>
+            <p class="text-slate-300 text-xs mt-1">Phân tích học máy kết hợp dữ liệu vi khí hậu, phenology sinh học cây sầu riêng và 500+ nông hộ Đồng Nai</p>
+          </div>
+          <div class="text-right">
+            <span class="text-xs text-slate-400 block">Độ tin cậy mô hình (Confidence Score)</span>
+            <span class="text-2xl font-black text-emerald-400">89.2% <span class="text-xs text-slate-300 font-normal">(± 4.5% sai số)</span></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4 HỘP CẢNH BÁO RỦI RO THỜI GIAN THỰC (EARLY RISK ALERTS) -->
+      <div>
+        <h3 class="font-bold text-slate-800 text-base mb-3 flex items-center gap-2">
+          <span>⚠️ Hệ Thống Cảnh Báo Rủi Ro Tự Động (Real-time Early Warning)</span>
+          <span class="bg-red-100 text-red-700 text-xs px-2 py-0.5 rounded-full font-bold">4 Cảnh Báo Hoạt Động</span>
+        </h3>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 text-xs">
+          <!-- Cảnh báo 1: Nguy cơ dư thừa nguồn cung -->
+          <div class="bg-amber-50 border-l-4 border-amber-500 rounded-xl p-4 shadow-sm flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between text-amber-800 font-bold mb-1">
+                <span>CẢNH BÁO DƯ THỪA CUNG</span>
+                <span class="bg-amber-200 text-amber-900 text-[10px] px-1.5 py-0.5 rounded">Cấp 2: Vàng</span>
+              </div>
+              <p class="text-slate-700 font-semibold mt-1">Tuần 3 Tháng 6 rộ 650 tấn Ri6</p>
+              <p class="text-slate-600 text-[11px] mt-1 leading-relaxed">
+                Nguồn cung tại Long Khánh & Cẩm Mỹ vượt 270 tấn so với tổng nhu cầu hiện hữu của các doanh nghiệp.
+              </p>
+            </div>
+            <div class="mt-3 pt-2 border-t border-amber-200">
+              <span class="text-[10px] text-amber-900 font-semibold">Khuyến nghị AI: Kích hoạt liên kết kho lạnh cấp đông và đẩy mạnh kênh phân phối TP.HCM trước 20 ngày.</span>
+            </div>
+          </div>
+
+          <!-- Cảnh báo 2: Lệch pha thời gian thu hoạch -->
+          <div class="bg-sky-50 border-l-4 border-sky-500 rounded-xl p-4 shadow-sm flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between text-sky-800 font-bold mb-1">
+                <span>LỆCH THỜI GIAN GIAO HÀNG</span>
+                <span class="bg-sky-200 text-sky-900 text-[10px] px-1.5 py-0.5 rounded">Cấp 2: Lưu ý</span>
+              </div>
+              <p class="text-slate-700 font-semibold mt-1">Đơn hàng 50 tấn DN Á Châu</p>
+              <p class="text-slate-600 text-[11px] mt-1 leading-relaxed">
+                Doanh nghiệp cần nhận hàng ngày 01/06 nhưng độ brix thực tế tại vườn mới đạt 28° (dự kiến chín ngọt 08/06).
+              </p>
+            </div>
+            <div class="mt-3 pt-2 border-t border-sky-200">
+              <span class="text-[10px] text-sky-900 font-semibold">Khuyến nghị AI: Tự động đề xuất DN lùi ngày giao nhận thêm 7 ngày để tránh sượng cơm.</span>
+            </div>
+          </div>
+
+          <!-- Cảnh báo 3: Thời tiết cực đoan ảnh hưởng năng suất -->
+          <div class="bg-red-50 border-l-4 border-red-500 rounded-xl p-4 shadow-sm flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between text-red-800 font-bold mb-1">
+                <span>CẢNH BÁO MƯA LỚN CẨM MỸ</span>
+                <span class="bg-red-200 text-red-900 text-[10px] px-1.5 py-0.5 rounded">Cấp 3: Cao</span>
+              </div>
+              <p class="text-slate-700 font-semibold mt-1">Dự báo mưa dông 25 - 28/05</p>
+              <p class="text-slate-600 text-[11px] mt-1 leading-relaxed">
+                Nguy cơ nứt gai và sượng trái cục bộ. AI tự động giảm biên độ dự báo sản lượng thu hoạch 8.5% đối với 12 hộ.
+              </p>
+            </div>
+            <div class="mt-3 pt-2 border-t border-red-200">
+              <span class="text-[10px] text-red-900 font-semibold">Khuyến nghị AI: Hướng dẫn nông dân xử lý rãnh thoát nước vườn và tạm ngưng bón phân đạm.</span>
+            </div>
+          </div>
+
+          <!-- Cảnh báo 4: Rủi ro hồ sơ & mã số vùng trồng -->
+          <div class="bg-emerald-50 border-l-4 border-emerald-500 rounded-xl p-4 shadow-sm flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between text-emerald-800 font-bold mb-1">
+                <span>GIÁM SÁT MÃ VÙNG TRỒNG</span>
+                <span class="bg-emerald-200 text-emerald-900 text-[10px] px-1.5 py-0.5 rounded">An toàn</span>
+              </div>
+              <p class="text-slate-700 font-semibold mt-1">100% MSVT Đạt chuẩn xuất khẩu</p>
+              <p class="text-slate-600 text-[11px] mt-1 leading-relaxed">
+                Mã VN-DNOR-0082 và VN-DNOR-0105 đã hoàn tất kiểm nghiệm dư lượng BVTV định kỳ, đủ điều kiện thông quan.
+              </p>
+            </div>
+            <div class="mt-3 pt-2 border-t border-emerald-200">
+              <span class="text-[10px] text-emerald-900 font-semibold">Tình trạng: Hồ sơ điện tử đã sẵn sàng tích hợp thẳng vào tờ khai hải quan điện tử.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BIỂU ĐỒ DỰ BÁO NGUỒN CUNG VS NHU CẦU THU MUA (SVG VISUALIZATION) -->
+      <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 mb-6">
+          <div>
+            <h3 class="font-bold text-slate-800 text-base">Biểu Đồ Dự Báo Nguồn Cung Khả Ứng & Nhu Cầu Thị Trường (Tuần)</h3>
+            <p class="text-xs text-slate-500">Mô phỏng đường cong cung - cầu sầu riêng tỉnh Đồng Nai từ Tháng 5 đến Tháng 7/2026</p>
+          </div>
+          <div class="flex items-center gap-4 text-xs">
+            <div class="flex items-center gap-1.5">
+              <span class="w-3 h-3 bg-emerald-500 rounded-sm"></span>
+              <span class="text-slate-600">Sản lượng dự báo AI (Tấn)</span>
+            </div>
+            <div class="flex items-center gap-1.5">
+              <span class="w-3 h-1 bg-sky-600 inline-block"></span>
+              <span class="text-slate-600">Nhu cầu Doanh nghiệp đã đăng</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- SVG Chart -->
+        <div class="w-full overflow-x-auto">
+          <div class="min-w-[650px] h-64 relative flex items-end justify-between px-4 pb-8 pt-4 border-b border-l border-slate-200">
+            <!-- Grid lines ngang -->
+            <div class="absolute inset-x-0 bottom-16 border-b border-slate-100 border-dashed"></div>
+            <div class="absolute inset-x-0 bottom-32 border-b border-slate-100 border-dashed"></div>
+            <div class="absolute inset-x-0 bottom-48 border-b border-slate-100 border-dashed"></div>
+
+            <!-- Cột 1: Tuần 2 Tháng 5 -->
+            <div class="flex-1 flex flex-col items-center gap-2 h-full justify-end group">
+              <span class="text-[10px] font-bold text-slate-500 group-hover:text-emerald-600">45T</span>
+              <div class="w-10 bg-emerald-400 rounded-t-lg transition-all hover:bg-emerald-500" style="height: 20%;"></div>
+              <span class="text-[11px] text-slate-500 text-center">T2/T5<br><span class="text-[9px] text-slate-400">Đầu vụ</span></span>
+            </div>
+
+            <!-- Cột 2: Tuần 3 Tháng 5 -->
+            <div class="flex-1 flex flex-col items-center gap-2 h-full justify-end group">
+              <span class="text-[10px] font-bold text-slate-500 group-hover:text-emerald-600">95T</span>
+              <div class="w-10 bg-emerald-400 rounded-t-lg transition-all hover:bg-emerald-500" style="height: 38%;"></div>
+              <span class="text-[11px] text-slate-500 text-center">T3/T5</span>
+            </div>
+
+            <!-- Cột 3: Tuần 4 Tháng 5 -->
+            <div class="flex-1 flex flex-col items-center gap-2 h-full justify-end group">
+              <span class="text-[10px] font-bold text-slate-500 group-hover:text-emerald-600">180T</span>
+              <div class="w-10 bg-emerald-500 rounded-t-lg transition-all hover:bg-emerald-600" style="height: 60%;"></div>
+              <span class="text-[11px] text-slate-500 text-center">T4/T5</span>
+            </div>
+
+            <!-- Cột 4: Tuần 1 Tháng 6 -->
+            <div class="flex-1 flex flex-col items-center gap-2 h-full justify-end group">
+              <span class="text-[10px] font-bold text-slate-500 group-hover:text-emerald-600">260T</span>
+              <div class="w-10 bg-emerald-500 rounded-t-lg transition-all hover:bg-emerald-600" style="height: 75%;"></div>
+              <span class="text-[11px] text-slate-500 text-center">T1/T6</span>
+            </div>
+
+            <!-- Cột 5: Tuần 2 Tháng 6 (ĐỈNH ĐIỂM SỰ KIỆN 100 TẤN) -->
+            <div class="flex-1 flex flex-col items-center gap-2 h-full justify-end group relative">
+              <span class="text-[10px] font-black text-emerald-800 bg-emerald-100 px-1.5 rounded">340T ★</span>
+              <div class="w-10 bg-emerald-600 rounded-t-lg transition-all hover:bg-emerald-700 shadow-md ring-2 ring-emerald-400" style="height: 92%;"></div>
+              <span class="text-[11px] font-bold text-emerald-800 text-center">T2/T6<br><span class="text-[9px] text-emerald-600 font-semibold">Chính vụ Ri6</span></span>
+            </div>
+
+            <!-- Cột 6: Tuần 3 Tháng 6 (VƯỢT CUNG) -->
+            <div class="flex-1 flex flex-col items-center gap-2 h-full justify-end group">
+              <span class="text-[10px] font-black text-amber-700 bg-amber-100 px-1 rounded">310T ⚠️</span>
+              <div class="w-10 bg-amber-500 rounded-t-lg transition-all hover:bg-amber-600" style="height: 86%;"></div>
+              <span class="text-[11px] text-slate-500 text-center">T3/T6<br><span class="text-[9px] text-amber-600 font-bold">Vượt cầu</span></span>
+            </div>
+
+            <!-- Cột 7: Tuần 4 Tháng 6 -->
+            <div class="flex-1 flex flex-col items-center gap-2 h-full justify-end group">
+              <span class="text-[10px] font-bold text-slate-500 group-hover:text-emerald-600">190T</span>
+              <div class="w-10 bg-emerald-500 rounded-t-lg transition-all hover:bg-emerald-600" style="height: 62%;"></div>
+              <span class="text-[11px] text-slate-500 text-center">T4/T6</span>
+            </div>
+
+            <!-- Cột 8: Tháng 7 (Monthong) -->
+            <div class="flex-1 flex flex-col items-center gap-2 h-full justify-end group">
+              <span class="text-[10px] font-bold text-slate-500 group-hover:text-emerald-600">220T</span>
+              <div class="w-10 bg-teal-500 rounded-t-lg transition-all hover:bg-teal-600" style="height: 70%;"></div>
+              <span class="text-[11px] text-slate-500 text-center">T1/T7<br><span class="text-[9px] text-teal-600">Monthong</span></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-4 p-3 rounded-xl bg-slate-50 border border-slate-200 text-xs flex flex-col sm:flex-row items-center justify-between gap-2">
+          <div class="flex items-center gap-2 text-slate-700">
+            <span>ℹ️</span>
+            <span>Khoảng dao động tin cậy P10 - P90: Biên độ chênh lệch năng suất dự báo thực tế chỉ dao động trong mức <strong>± 12.8 tấn</strong> trên toàn cụm.</span>
+          </div>
+          <button onclick="alert('Đã cập nhật dữ liệu vệ tinh Sentinel-2 và chỉ số thực vật NDVI mới nhất cho vùng Đồng Nai.')" class="text-xs text-emerald-700 hover:text-emerald-800 font-bold underline whitespace-nowrap">
+            Cập nhật chỉ số NDVI Vệ tinh
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- 5. TÌNH HUỐNG THỰC TẾ (CASE STUDY 100 TẤN) -->
+    <!-- ========================================== -->
+    <section id="view-case-study" class="space-y-6 hidden">
+      <!-- Header Case Study -->
+      <div class="bg-gradient-to-r from-teal-800 to-emerald-900 rounded-2xl p-6 text-white shadow-md">
+        <div class="inline-flex items-center gap-2 bg-white/10 px-3 py-1 rounded-full text-xs font-medium text-emerald-200 mb-2 border border-white/10">
+          <span>Tình Huống Thực Nghiệm Thực Tế Tại Đồng Nai</span>
+        </div>
+        <h1 class="text-2xl font-bold">Bài Toán Cung Ứng 100 Tấn Sầu Riêng Tháng 6</h1>
+        <p class="text-emerald-100 text-xs mt-1">
+          Kịch bản liên kết 50 hộ nông dân phân tán (0.5 - 3 ha) với Doanh nghiệp xuất khẩu qua DONG NAI AGROLINK
+        </p>
+      </div>
+
+      <!-- QUY TRÌNH 8 BƯỚC KHÉP KÍN THEO DÒNG THỜI GIAN -->
+      <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm space-y-6">
+        <h3 class="font-bold text-slate-800 text-base border-b pb-3">Diễn Tiến 8 Bước Vận Hành Thực Tế</h3>
+
+        <div class="relative border-l-2 border-emerald-500 ml-4 pl-6 space-y-6 text-xs">
+          <!-- BƯỚC 1 -->
+          <div class="relative">
+            <span class="absolute -left-[33px] top-0 w-5 h-5 rounded-full bg-emerald-600 text-white font-bold text-[10px] flex items-center justify-center">1</span>
+            <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200">
+              <div class="flex items-center justify-between font-bold text-slate-800 text-sm mb-1">
+                <span>Bước 1: Nông dân cập nhật bằng Trợ lý Giọng nói Voice AI</span>
+                <span class="text-emerald-600 text-xs">Từ 10/05 đến 25/05</span>
+              </div>
+              <p class="text-slate-600 text-xs">
+                50 hộ nông dân tại Long Khánh, Cẩm Mỹ trò chuyện 2 phút qua ứng dụng. Bác Ba Thắng (1.8 ha), Chú Tám Long (2.4 ha), Chú Tư Lộc (1.5 ha)... cập nhật: "Trái đều, khoảng 15/6 đến 20/6 cắt". AI ghi nhận và số hóa 100% dữ liệu vườn không sai sót.
+              </p>
+            </div>
+          </div>
+
+          <!-- BƯỚC 2 -->
+          <div class="relative">
+            <span class="absolute -left-[33px] top-0 w-5 h-5 rounded-full bg-emerald-600 text-white font-bold text-[10px] flex items-center justify-center">2</span>
+            <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200">
+              <div class="flex items-center justify-between font-bold text-slate-800 text-sm mb-1">
+                <span>Bước 2: Hợp tác xã Xuân Định tổng hợp & xác thực nguồn cung</span>
+                <span class="text-emerald-600 text-xs">26/05/2026</span>
+              </div>
+              <p class="text-slate-600 text-xs">
+                Ban quản trị HTX kiểm tra trên bản đồ số GIS, xác nhận tổng sản lượng Ri6 khả dụng trong tháng 6 đạt 182 tấn (trong đó đợt cắt rộ từ 12-20/6 đạt 120 tấn), hồ sơ VietGAP và Mã số vùng trồng VN-DNOR-0082 đã hoàn tất kiểm định.
+              </p>
+            </div>
+          </div>
+
+          <!-- BƯỚC 3 -->
+          <div class="relative">
+            <span class="absolute -left-[33px] top-0 w-5 h-5 rounded-full bg-emerald-600 text-white font-bold text-[10px] flex items-center justify-center">3</span>
+            <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200">
+              <div class="flex items-center justify-between font-bold text-slate-800 text-sm mb-1">
+                <span>Bước 3: Doanh nghiệp đăng nhu cầu mua 100 tấn sầu riêng</span>
+                <span class="text-emerald-600 text-xs">28/05/2026</span>
+              </div>
+              <p class="text-slate-600 text-xs">
+                Công ty Đồng Nai Xanh cần xuất khẩu chính ngạch 100 tấn Ri6 sang Trung Quốc, yêu cầu nhận hàng từ 10/06 đến 22/06 tại vựa lạnh Long Khánh.
+              </p>
+            </div>
+          </div>
+
+          <!-- BƯỚC 4 & 5 -->
+          <div class="relative">
+            <span class="absolute -left-[33px] top-0 w-5 h-5 rounded-full bg-emerald-600 text-white font-bold text-[10px] flex items-center justify-center">4</span>
+            <div class="bg-emerald-50 p-3.5 rounded-xl border border-emerald-200">
+              <div class="flex items-center justify-between font-bold text-emerald-900 text-sm mb-1">
+                <span>Bước 4 & 5: AI Phân tích dữ liệu & Đề xuất Top 2 HTX tối ưu</span>
+                <span class="text-emerald-700 text-xs font-semibold">Tức thì (3 giây)</span>
+              </div>
+              <p class="text-slate-700 text-xs leading-relaxed">
+                Hệ thống quét 32 HTX toàn tỉnh và đề xuất: <strong>#1 HTX Xuân Định (94.8 điểm)</strong> và <strong>#2 HTX Bình Lộc (88.5 điểm)</strong>. Doanh nghiệp nắm rõ nguyên nhân lựa chọn và năng lực thực tế mà không cần cử người đi từng vườn.
+              </p>
+            </div>
+          </div>
+
+          <!-- BƯỚC 6, 7 & 8 -->
+          <div class="relative">
+            <span class="absolute -left-[33px] top-0 w-5 h-5 rounded-full bg-emerald-600 text-white font-bold text-[10px] flex items-center justify-center">6</span>
+            <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200">
+              <div class="flex items-center justify-between font-bold text-slate-800 text-sm mb-1">
+                <span>Bước 6, 7 & 8: Kết nối, ký hợp đồng điện tử & Giao nhận thành công</span>
+                <span class="text-emerald-600 text-xs">01/06 - 20/06/2026</span>
+              </div>
+              <p class="text-slate-600 text-xs leading-relaxed">
+                Doanh nghiệp bấm kết nối HTX Xuân Định $\rightarrow$ HTX chấp thuận $\rightarrow$ Ký hợp đồng nguyên tắc 100 tấn $\rightarrow$ Đúng ngày 15/06 xe chuyên dụng đến cắt trái trực tiếp tại vườn Bác Ba Thắng, Tám Long, Tư Lộc $\rightarrow$ Đạt 100% tiêu chuẩn kiểm dịch thông quan cửa khẩu, nông dân nhận tiền ngay qua tài khoản.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- MODAL KẾT NỐI HỢP ĐỒNG (SIMULATION POPUP) -->
+  <div id="modal-contract" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+    <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl space-y-4">
+      <div class="flex items-center justify-between pb-3 border-b">
+        <h3 class="font-bold text-slate-800 text-base">Xác Nhận Kết Nối & Đề Nghị Hợp Đồng</h3>
+        <button onclick="closeModal()" class="text-slate-400 hover:text-slate-600 text-lg">&times;</button>
+      </div>
+
+      <div class="text-xs space-y-3 text-slate-600">
+        <p>Hệ thống Agrolink đang tạo lệnh kết nối trực tiếp giữa:</p>
+        <div class="p-3 bg-emerald-50 rounded-xl border border-emerald-200 text-emerald-900 font-medium">
+          • Bên Mua: <strong>Công ty CP XNK Nông Sản Đồng Nai Xanh</strong><br>
+          • Bên Cung Ứng: <strong id="modal-htx-name">HTX Nông Nghiệp Dịch Vụ Xuân Định</strong><br>
+          • Khối lượng: <strong>100 Tấn Sầu riêng Ri6 (Loại 1 Xuất khẩu)</strong><br>
+          • Thời gian cắt giao: <strong>12/06/2026 - 20/06/2026</strong>
+        </div>
+        <p class="text-[11px] text-slate-500">
+          Sau khi xác nhận, thông báo sẽ được gửi qua SMS và Notification đến Chủ tịch HĐQT HTX, đồng thời giữ chỗ tạm thời (Soft-lock) 100 tấn trong kho dữ liệu toàn tỉnh.
+        </p>
+      </div>
+
+      <div class="flex gap-2 pt-2">
+        <button onclick="confirmContractAction()" class="flex-1 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs shadow">
+          ✅ Xác Nhận Gửi Yêu Cầu Kết Nối
+        </button>
+        <button onclick="closeModal()" class="px-4 py-2.5 rounded-xl border border-slate-200 hover:bg-slate-50 text-slate-600 text-xs font-semibold">
+          Hủy
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION -->
+  <div id="toast" class="fixed bottom-6 right-6 bg-slate-900 text-white px-5 py-3 rounded-xl shadow-2xl text-xs flex items-center gap-2 transform translate-y-20 opacity-0 transition-all duration-300 z-50">
+    <span id="toast-icon">✅</span>
+    <span id="toast-message">Thông báo hệ thống</span>
+  </div>
+
+  <!-- FOOTER CHÍNH -->
+  <footer class="bg-white border-t border-slate-200 py-6 mt-12 text-slate-500 text-xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="flex items-center space-x-2">
+        <span class="font-bold text-emerald-800">DONG NAI AGROLINK</span>
+        <span>•</span>
+        <span>Mô hình chuyển đổi số nông nghiệp thông minh</span>
+      </div>
+      <p class="text-center md:text-right text-[11px]">
+        Phát triển theo định hướng nông nghiệp sinh thái, chuỗi liên kết bền vững tỉnh Đồng Nai.
+      </p>
+    </div>
+  </footer>
+
+  <!-- SCRIPT LOGIC TƯƠNG TÁC -->
+  <script>
+    // Tab switcher
+    function switchTab(tabId) {
+      const views = ['farmer', 'htx', 'buyer', 'ai-center', 'case-study'];
+      views.forEach(v => {
+        document.getElementById(`view-${v}`).classList.add('hidden');
+        const btn = document.getElementById(`tab-${v}`);
+        btn.classList.remove('bg-emerald-500', 'text-white', 'shadow');
+        btn.classList.add('text-emerald-100', 'hover:bg-white/10');
+      });
+
+      document.getElementById(`view-${tabId}`).classList.remove('hidden');
+      const activeBtn = document.getElementById(`tab-${tabId}`);
+      activeBtn.classList.remove('text-emerald-100', 'hover:bg-white/10');
+      activeBtn.classList.add('bg-emerald-500', 'text-white', 'shadow');
+    }
+
+    // Voice simulation
+    let isListening = false;
+    function simulateVoiceInput() {
+      const btnMic = document.getElementById('btn-mic');
+      const micLabel = document.getElementById('mic-label');
+      const statusBadge = document.getElementById('voice-status-badge');
+      const farmerBubble = document.getElementById('farmer-speech-bubble');
+      const aiExtract = document.getElementById('ai-extract-bubble');
+      const syncBtn = document.getElementById('btn-sync-htx');
+
+      btnMic.classList.add('bg-red-600', 'mic-active');
+      micLabel.innerText = "Đang lắng nghe Bác Ba nói...";
+      statusBadge.innerText = "Đang thu âm tiếng Việt...";
+      statusBadge.className = "text-xs px-2.5 py-1 rounded-full bg-red-100 text-red-700 font-bold animate-pulse";
+
+      showToast("🎙️ Đang ghi nhận giọng nói tiếng Việt...", "⏳");
+
+      setTimeout(() => {
+        btnMic.classList.remove('bg-red-600', 'mic-active');
+        micLabel.innerText = "Bác Ba đã nói xong";
+        statusBadge.innerText = "Đã nhận dạng văn bản & Thực thể";
+        statusBadge.className = "text-xs px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800 font-semibold";
+
+        farmerBubble.classList.remove('hidden');
+        
+        setTimeout(() => {
+          aiExtract.classList.remove('hidden');
+          syncBtn.disabled = false;
+          syncBtn.classList.remove('bg-slate-200', 'text-slate-400', 'cursor-not-allowed');
+          syncBtn.classList.add('bg-emerald-600', 'hover:bg-emerald-700', 'text-white', 'shadow', 'cursor-pointer');
+          showToast("AI đã bóc tách thông tin vụ thu hoạch thành công!", "✨");
+        }, 1000);
+
+      }, 2200);
+    }
+
+    function resetVoiceInput() {
+      document.getElementById('farmer-speech-bubble').classList.add('hidden');
+      document.getElementById('ai-extract-bubble').classList.add('hidden');
+      const syncBtn = document.getElementById('btn-sync-htx');
+      syncBtn.disabled = true;
+      syncBtn.className = "px-5 py-2.5 rounded-xl bg-slate-200 text-slate-400 font-semibold text-xs transition-all flex items-center gap-1.5 cursor-not-allowed";
+      document.getElementById('mic-label').innerText = "Bấm để nói chuyện với AI";
+      document.getElementById('voice-status-badge').innerText = "Sẵn sàng lắng nghe";
+      document.getElementById('voice-status-badge').className = "text-xs px-2.5 py-1 rounded-full bg-slate-100 text-slate-600 font-medium";
+    }
+
+    function confirmSyncHTX() {
+      showToast("Đã đồng bộ 28 tấn sầu riêng của Bác Ba Thắng lên Hợp Tác Xã Xuân Định!", "🎉");
+      setTimeout(() => {
+        switchTab('htx');
+      }, 1200);
+    }
+
+    function simulateDiagnosis() {
+      const res = document.getElementById('diagnosis-result');
+      res.classList.remove('hidden');
+      showToast("AI hoàn tất chẩn đoán sâu bệnh từ hình ảnh lá cây!", "🔬");
+    }
+
+    function runAIMatchmaker() {
+      showToast("AI đang phân tích 32 HTX Đồng Nai và xếp hạng Top 2...", "🤖");
+      const recCards = document.getElementById('ai-recommendation-cards');
+      recCards.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function initiateContract(htxName) {
+      document.getElementById('modal-htx-name').innerText = htxName;
+      document.getElementById('modal-contract').classList.remove('hidden');
+    }
+
+    function closeModal() {
+      document.getElementById('modal-contract').classList.add('hidden');
+    }
+
+    function confirmContractAction() {
+      closeModal();
+      showToast("Đã gửi yêu cầu kết nối thành công! Đang chờ HTX phản hồi xác nhận.", "🚀");
+    }
+
+    function acceptBuyerOrder() {
+      showToast("HTX Xuân Định đã chấp thuận giữ lô 100 tấn cho Công Ty Đồng Nai Xanh!", "🤝");
+    }
+
+    function showToast(msg, icon = "✅") {
+      const toast = document.getElementById('toast');
+      document.getElementById('toast-message').innerText = msg;
+      document.getElementById('toast-icon').innerText = icon;
+      toast.classList.remove('translate-y-20', 'opacity-0');
+      setTimeout(() => {
+        toast.classList.add('translate-y-20', 'opacity-0');
+      }, 3500);
+    }
+  </script>
+</body>
+</html>
